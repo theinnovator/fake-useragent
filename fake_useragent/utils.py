@@ -8,6 +8,7 @@ import json
 import os
 import re
 import ssl
+import requests
 
 from fake_useragent.log import logger
 
@@ -87,6 +88,11 @@ def get(url, verify_ssl=True):
                     'Sleeping for %s seconds',
                     settings.HTTP_DELAY,
                 )
+                try:
+                    response = requests.get(url)
+                    return response.content
+                except:
+                    pass
                 sleep(settings.HTTP_DELAY)
 
 
