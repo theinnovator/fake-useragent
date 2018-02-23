@@ -13,9 +13,11 @@ DB = os.path.join(
     ),
 )
 
-CACHE_SERVER = 'https://fake-useragent.herokuapp.com/browsers/{version}'.format(  # noqa
-    version=__version__,
-)
+# CACHE_SERVER = 'https://fake-useragent.herokuapp.com/browsers/{version}'.format(  # noqa
+#     version=__version__,
+# )
+
+CACHE_SERVER = 'http://d2g6u4gh6d9rq0.cloudfront.net/browsers/fake_useragent_0.1.10.json'
 
 BROWSERS_STATS_PAGE = 'https://www.w3schools.com/browsers/default.asp'
 
