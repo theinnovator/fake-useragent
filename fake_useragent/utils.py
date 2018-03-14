@@ -183,17 +183,25 @@ def load(use_cache_server=True, verify_ssl=True):
         if not use_cache_server:
             raise exc
 
+        # logger.warning(
+        #     'Error occurred during loading data. '
+        #     'Trying to use cache server %s',
+        #     settings.CACHE_SERVER,
+        #     exc_info=exc,
+        # )
         logger.warning(
             'Error occurred during loading data. '
-            'Trying to use cache server %s',
-            settings.CACHE_SERVER,
+            'Using the internal cached version',
             exc_info=exc,
         )
         try:
-            ret = json.loads(get(
-                settings.CACHE_SERVER,
-                verify_ssl=verify_ssl,
-            ).decode('utf-8'))
+
+            with open('fake_useragent_0.1.10.json') as data_file:
+                ret = json.loads(data_file).decode('utf-8')
+            # ret = json.loads(get(
+            #     settings.CACHE_SERVER,
+            #     verify_ssl=verify_ssl,
+            # ).decode('utf-8'))
         except (TypeError, ValueError):
             raise FakeUserAgentError('Can not load data from cache server')
     else:
